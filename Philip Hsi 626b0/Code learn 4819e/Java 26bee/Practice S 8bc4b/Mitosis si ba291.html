@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>A + B</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mitosis simulation</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -666,20 +666,38 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="ae4e1d5b-fa74-4369-bc36-22ff7301be3b" class="page sans"><header><h1 class="page-title">A + B</h1></header><div class="page-body"><p id="0cc6698f-114c-455b-96af-595ad2710759" class="">13 April, 2022</p><p id="1d8f2195-1efd-45e9-b70e-005802c41d1b" class="">Length: 1 minute</p><p id="2ac83ad1-649f-4a1b-98ef-d80e8776ea19" class="">
-</p><p id="46100a21-a124-462f-a4ba-320d0b7e9bdf" class=""><strong>Description:</strong></p><p id="e3233ed8-2727-4bc9-a8ae-5078b951ce42" class="">Given two integers, calculate and print out the result.</p><p id="d1ff65e6-3adb-493d-a66f-edf45f215d40" class="">
-</p><pre id="1569c251-af5f-4f01-a898-2732c45b619f" class="code"><code>import java.util.Scanner;
+</style></head><body><article id="ba29151f-19be-4e38-ac13-0a72cac1542c" class="page sans"><header><h1 class="page-title">Mitosis simulation</h1></header><div class="page-body"><p id="5439c540-dc03-46fe-a6a0-f6d592956c24" class="">14 April, 2022</p><p id="9944d557-177f-4347-8a4f-72da8ba2d4ee" class="">Length: 1 minute</p><p id="a85abb72-b952-4a64-bc3a-33d14857695c" class="">
+</p><p id="1212c6f2-2211-4ac0-80a6-2f273a284335" class=""><strong>Description:</strong></p><p id="6cb4a0ae-a802-424d-855b-44cf1d972fca" class="">Not an actual biology experiment!</p><p id="a602f3bd-2d80-420d-84bd-37b0f07462e1" class="">Imagine a unique organism Beta that reproduces via mitosis.</p><p id="7389c5f0-fe48-44de-8f6a-601b7b60f278" class="">
+</p><p id="862868c5-b8b1-4cfb-be55-8d276db6d325" class="">bB = Big Beta</p><p id="5abe4910-451c-4aa6-aa03-4ec07e7a77ed" class="">sB = Small Beta</p><p id="feb6990a-6150-4dc7-930c-02f18a3ef041" class="">
+</p><p id="912b63d8-d160-495d-b142-714d0d63c7ba" class="">Everyday, a Big Beta(bB) will split out 1 Small Beta(sB).</p><p id="1b99f09c-6d62-4c69-b2bf-ac6e04cdf35b" class="">A Small Beta(sB) will also split out 1 Small Beta(sB).</p><p id="d2d6dcbf-fc25-487a-a904-cd234e7285c0" class="">
+</p><p id="719f2c20-ac3c-4eed-b664-8ed78c3a66d8" class="">Example:</p><p id="a7f55af3-49ae-41b2-828f-af8f92c70e66" class="">On day 1, there is 1 bB. </p><p id="6bb2eebf-f62d-4fbd-b8d3-ffce1c322070" class="">On day 2, there will be 1bB + 1sB. </p><p id="1d7ebff7-e3d4-45a1-b670-226446a22bd9" class="">On day3, there will be 1bB + 3sB.</p><p id="44cc963b-ee30-4ee7-bb1f-4539fbf7585b" class="">... and so on.</p><p id="4a5d8cb7-5f25-4e97-9079-6f6809008167" class="">
+</p><p id="ce4ec47b-9094-401b-93ee-13d213d92c34" class="">The program will input the current number of bB and sB. Your task is to return how many days has passed to reach the inputted population.</p><p id="c8ec38a3-80d2-4d82-b3a4-031777a3ea40" class="">
+</p><p id="824d4e71-ff7f-4927-bb40-42b7ec8bacec" class="">bB range: 1 ≤ PB ≤ 10</p><p id="9002bf6f-d254-4e99-a43a-ef119258da80" class="">sB range: 0 ≤ NB ≤ 50,000</p><p id="19d63d13-f9d5-4004-a296-2820a691d0d3" class="">The tester will not input values that violates their reproductive behavior.</p><p id="aa55befd-40c9-40bc-b6b9-ea0f4efb8b52" class="">
+</p><pre id="79854219-be45-4162-8afa-8b7446925228" class="code"><code>import java.util.Scanner;
 
 public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int sum = 0;
-		int numbersToAdd = 2;
-    for (int i = 0; i &lt; numbersToAdd; i++) {
-      sum = sum + sc.nextInt();
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // 第一個小Beta一定來自大Beta
+        // 大Beta的數量恆定
+        // 第一天小Beta數量為零
+        // 大Beta數量 = 小Beta第2天的數量
+        // 從第三天開始，小Beta數量 = 自身*2+大Beta數量
+
+        int bigBeta = sc.nextInt();
+        int smallBeta = sc.nextInt();
+        int days = 0;
+
+        int iniOfBigB = bigBeta;
+        int iniOfSmallB = 0;
+
+        while (iniOfSmallB != smallBeta) {
+            iniOfSmallB = iniOfSmallB * 2 + bigBeta;
+            days++;
+        }
+        System.out.println(days);
     }
-    System.out.println(sum);
-  }
-}</code></pre><p id="1832c3a2-0d6c-4888-919a-a9d437731f5f" class="">
-</p><p id="1878fc3c-af07-42eb-9356-2f8e018e5202" class=""><strong>My thoughts:</strong></p><p id="0a61c448-fe84-4b98-a9d0-7276395ef729" class="">It is a pretty straight-forward problem and probably best to just simply declare to int variables and return the result.</p><p id="b36b1bb0-21a6-4e21-81b5-d97e4b1618b0" class="">
+}</code></pre><p id="0f629253-18a6-4722-bdca-4bea4755c70e" class="">
+</p><p id="fb23f0c9-efe9-4af1-8563-9d61796ac2e4" class=""><strong>My thoughts:</strong></p><ol type="1" id="148d8abc-65d8-444f-9c6f-c9c33341708a" class="numbered-list" start="1"><li>The first batch of Small Betas must come from Big Betas. </li></ol><ol type="1" id="59d73ba2-b3b6-4542-9174-e8ffcce43dfb" class="numbered-list" start="2"><li>And that through out the observation period, the number of Big Betas will remain constant.</li></ol><ol type="1" id="7f0a220d-f5b5-4a8d-8541-8196f3a72b7d" class="numbered-list" start="3"><li>Keeping the above logical relationship in mind, it can be deduced that there must be no Small Betas within the population on the first day. </li></ol><ol type="1" id="6ddf293a-db07-45b3-8200-19b000f979a2" class="numbered-list" start="4"><li>And that the number of Small Betas on day 2 must be equal to the number of Big Betas.</li></ol><p id="dd292b6c-598b-4421-95e2-852b8c227cd1" class="">Therefore the following equation will be applicable in determining the number of Small Betas starting from day 3 onward.</p><figure id="dbeb508b-8818-42e2-8143-33a66ebabe22" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mi>B</mi><mi>P</mi><mi>o</mi><mi>p</mi><mi>u</mi><mi>l</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>=</mo><mi>s</mi><mi>B</mi><mi>P</mi><mi>o</mi><mi>p</mi><mi>u</mi><mi>l</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>∗</mo><mn>2</mn><mo>+</mo><mi>b</mi><mi>B</mi><mi>P</mi><mi>o</mi><mi>p</mi><mi>u</mi><mi>l</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">sBPopulation = sBPopulation * 2 + bBPopulation</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.13889em;">BP</span><span class="mord mathnormal">o</span><span class="mord mathnormal">p</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.13889em;">BP</span><span class="mord mathnormal">o</span><span class="mord mathnormal">p</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">b</span><span class="mord mathnormal" style="margin-right:0.13889em;">BP</span><span class="mord mathnormal">o</span><span class="mord mathnormal">p</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span></span></span></span></span></div></figure><p id="667da4d5-b869-4b26-8b68-6e112170e330" class="">
 </p></div></article></body></html>

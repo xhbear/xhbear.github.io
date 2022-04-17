@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>A + B</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Largest rectangle area of a histogram</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -666,20 +666,76 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="ae4e1d5b-fa74-4369-bc36-22ff7301be3b" class="page sans"><header><h1 class="page-title">A + B</h1></header><div class="page-body"><p id="0cc6698f-114c-455b-96af-595ad2710759" class="">13 April, 2022</p><p id="1d8f2195-1efd-45e9-b70e-005802c41d1b" class="">Length: 1 minute</p><p id="2ac83ad1-649f-4a1b-98ef-d80e8776ea19" class="">
-</p><p id="46100a21-a124-462f-a4ba-320d0b7e9bdf" class=""><strong>Description:</strong></p><p id="e3233ed8-2727-4bc9-a8ae-5078b951ce42" class="">Given two integers, calculate and print out the result.</p><p id="d1ff65e6-3adb-493d-a66f-edf45f215d40" class="">
-</p><pre id="1569c251-af5f-4f01-a898-2732c45b619f" class="code"><code>import java.util.Scanner;
+</style></head><body><article id="52a9f9ae-219e-4379-a360-bdbf7110a856" class="page sans"><header><h1 class="page-title">Largest rectangle area of a histogram</h1></header><div class="page-body"><p id="8f5f1787-f0bb-413c-bf9f-33b19ada9f1e" class="">16 April, 2022</p><p id="87f1aa90-3013-422c-b2fc-bb0fa35e6d32" class="">Length: 2 minute</p><p id="78fe1818-5ed8-43c6-aa6f-b1d88abfda68" class="">
+</p><p id="f0d02a9e-b76d-4143-8373-6714e4361849" class=""><strong>Description:</strong></p><p id="2654e686-8282-4874-8a88-58382e81209c" class="">Take as input a set of integers that represents the length of each rectangle. Assume that width is fixed at 1 unit. Find the largest rectangle area that can be carved out from the set.</p><figure id="85ba6d48-c671-405b-a3c9-ccfc5e0d8317" class="image"><a href="Largest%20re%2052a9f/Untitled.png"><img style="width:522px" src="Largest%20re%2052a9f/Untitled.png"/></a></figure><p id="d556ca47-f4a5-47da-9f86-b6a52c7972f7" class="">
+</p><pre id="654292c8-8bbb-4dda-acd5-acdfd234bb04" class="code"><code>import java.util.Scanner;
 
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int sum = 0;
-		int numbersToAdd = 2;
-    for (int i = 0; i &lt; numbersToAdd; i++) {
-      sum = sum + sc.nextInt();
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int width = 1; // 寬度固定為1
+        int[] rectangles = new int[num];
+
+        for (int i = 0; i &lt; rectangles.length; i++) {
+            rectangles[i] = sc.nextInt();
+        } // 擷取每個長方形長度
+
+        int area = FindRectangleAreaInHistogram(rectangles, width);
+        System.out.println(area);
+
     }
-    System.out.println(sum);
-  }
-}</code></pre><p id="1832c3a2-0d6c-4888-919a-a9d437731f5f" class="">
-</p><p id="1878fc3c-af07-42eb-9356-2f8e018e5202" class=""><strong>My thoughts:</strong></p><p id="0a61c448-fe84-4b98-a9d0-7276395ef729" class="">It is a pretty straight-forward problem and probably best to just simply declare to int variables and return the result.</p><p id="b36b1bb0-21a6-4e21-81b5-d97e4b1618b0" class="">
-</p></div></article></body></html>
+    public static int FindRectangleAreaInHistogram (int[] arr, int width) {
+        /*
+        重要資訊：
+        1. 每長方形固定寬度=1單位
+        2. 回傳最大面積
+         */
+        int[] areaArr = new int[arr.length];
+        int max = 0;
+        for (int i = 0; i &lt; arr.length; i++) {
+            int left = LeftMostIndex(arr, i); // 往左邊看是否&gt;=自身長度，一直看到不是為止，或者到頭了
+            int right = RightMostIndex(arr, i); // 往右邊看是否&gt;=自身長度，一直看到不是為止，或者到頭了
+            areaArr[i] = (right - left + 1) * width * arr[i]; // 面積 = 符合條件的長方形數量 * 寬度（固定為1） * 長度
+            if (areaArr[i] &gt; max) {
+                max = areaArr[i];
+            }
+        }
+        return max;
+    }
+    public static int LeftMostIndex (int[] arr, int num) {
+        int indexLeft = num;
+        if (num == 0) {
+            return num;
+        } else {
+            int i = 1;
+            while (indexLeft &gt; 0) {
+                if (arr[num] &lt;= arr[num-i]) {
+                    indexLeft = indexLeft - 1;
+                    i++;
+                } else {
+                    break;
+                }
+            }
+        }
+        return indexLeft;
+    }
+    public static int RightMostIndex (int[] arr, int num) {
+        int indexRight = num;
+        if (num == arr.length-1) {
+            return num;
+        } else {
+            int i = 1;
+            while (indexRight &lt; arr.length-1) {
+                if (arr[num] &lt;= arr[num+i]) {
+                    indexRight = indexRight + 1;
+                    i++;
+                } else {
+                    break;
+                }
+            }
+        }
+        return indexRight;
+    }
+}</code></pre><p id="3f4eb6d2-3051-4424-8b68-a0fe3bc20b67" class="">
+</p><p id="4d5c7695-c8ac-4285-9eed-170b5c6d0683" class=""><strong>My thoughts:</strong></p><p id="e824d256-705a-4819-b47f-b7e06bf57179" class="">A tricky problem.</p><ol type="1" id="d2169b0d-d2f3-42b2-9236-b34f4d49c1b7" class="numbered-list" start="1"><li>For every single rectangle block in the array, we look to both directions to count how many blocks are at least of same length, or taller. </li></ol><ol type="1" id="8d041415-e751-426c-9d06-b9d5b4fdc245" class="numbered-list" start="2"><li>Multiply them by the width and length of said rectangle, repeat for each rectangle block.</li></ol><ol type="1" id="5fed25cc-a720-4a83-b8e1-b5bbd35fcef8" class="numbered-list" start="3"><li>Find the max among all the areas calculated.</li></ol></div></article></body></html>
