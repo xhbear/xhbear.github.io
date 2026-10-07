@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    border: 8px solid #e2b64f;
+    margin: 16px;
+    padding: 40px;
+}
+
+section {
+    padding: 5px;
+}
+
+button {
+    border-radius: 50%;
+}
+
+.scrollable,
+.scrollable div {
+    height: 300px;
+    width: 500px;
+        scroll-snap-type: y proximity;
+}
+
+.scrollable {
+    overflow: scroll;
+}
+
+.scrollable div {
+    background-color: beige;
+}
